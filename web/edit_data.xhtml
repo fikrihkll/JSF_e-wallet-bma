@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+        <style>
+            body{
+                margin:0;
+            }
+            .main{
+                
+                background-image: url("https://icd.gov.ae/wp-content/uploads/2020/06/commercial-bank-of-dubai.jpg"); 
+                width: 100%;
+            }
+            .card{
+                margin-top: 150px;
+                background-color: white;
+                padding:30px;
+                border-radius: 20px;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            }
+            .btn{
+                padding:5px;
+                border-radius:15px;
+                background-color: #a1caff;
+                border-color: 0;
+            }
+            
+            .btn:hover{
+                cursor:pointer;
+                background-color: #c9e1ff;
+            }
+            
+            .edit-text{
+                border-radius: 10px;
+                border-color: #a1caff;
+                padding:8px;
+            }
+            
+            .header{
+                grid-column-start: 1;
+                grid-column-end: 4;
+                
+                display:flex;
+                
+                align-items: center;
+                
+                padding: 20px;
+                
+                
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:inputHidden value="#{editDataPresenter.user}"/>
+        <h:form>
+            
+            <div class="header">
+                <h:commandLink action="home.xhtml">
+                    <img style="width:30px;" src="https://png.pngtree.com/png-vector/20190412/ourlarge/pngtree-vector-back-icon-png-image_931209.jpg"/>
+                </h:commandLink>
+                
+                <div style="font-size : 30px; color:#a1caff; margin-left: 20px; ">BME</div>
+                
+            </div>
+            <div  class="main">
+                <div style="display:flex; justify-content: center; align-items: center; height:100%">
+                    <div class="card">
+                        <h1 style="text-align: center;" >Profile Info</h1>
+                        <div style="display:flex; justify-content: space-between;">
+                            <span>Name</span><h:inputText style="margin-left: 30px; width:290px;" class="edit-text" value="#{editDataPresenter.name}" />
+                        </div>
+                        
+                        <div style="display:flex; justify-content: space-between;">
+                            <span>Email</span><h:inputText style="margin-left: 30px; width:290px;"  class="edit-text" value="#{editDataPresenter.email}" />
+                        </div>
+                        <div style="display:flex; justify-content: space-between;">
+                            <span>Address</span><h:inputText style="margin-left: 30px; width:290px;"  class="edit-text" value="#{editDataPresenter.address}" />
+                        </div>
+                        
+                        <h:commandButton class="btn" style="width:100%; margin-top: 30px" action="#{editDataPresenter.updateUserData()}" value="Save Information"/>
+                        
+                    </div>
+                </div>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+            </div>
+            
+            
+        </h:form>
+    </h:body>
+</html>
+

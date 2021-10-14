@@ -1,0 +1,211 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+        <style>
+            body{
+                margin: 0;
+            }
+
+            .container{
+                width: 100xw;
+                height: 100vh;
+
+                font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                
+                font-size: 14px;
+
+                display: grid;
+
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-rows: 80px 1fr 1fr 80px;
+
+                gap: 25px;
+
+                
+                box-sizing: border-box;
+            }
+
+            
+
+            .header{
+                grid-column-start: 1;
+                grid-column-end: 4;
+                
+                display:flex;
+                justify-content: space-between;
+                align-items: center;
+                
+                padding: 20px;
+                
+                
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            }
+            
+            
+
+            .content-large{
+                padding: 10px;
+                border-radius: 20px;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                grid-row-start: 2;
+                grid-row-end: span 2;
+                grid-column-start: 1;
+                grid-column-end: 2;
+            }
+            
+            .content-large-2{
+                padding: 10px;
+                border-radius: 20px;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                grid-row-start: 2;
+                grid-row-end: span 2;
+                grid-column-start: 3;
+                grid-column-end: 4;
+            }
+            
+            .content-small{
+                padding: 10px;
+                border-radius: 20px;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            }
+            
+            .info{
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .footer{
+                grid-column: 1 / span 3;
+
+                /* grid-column-start: 1;
+                grid-column-end: span 3; */
+            }
+            
+            .edit-text{
+                border-radius: 15px;
+                border-color: #a1caff;
+                padding:10px;
+            }
+            
+            .btn{
+                padding:5px;
+                border-radius:15px;
+                background-color: #a1caff;
+                border-color: 0;
+            }
+            
+            .btn:hover{
+                cursor:pointer;
+                background-color: #c9e1ff;
+            }
+            
+            .img-style{
+                width:100%; 
+                margin-top: 35px; 
+                border-radius:20px
+            }
+            
+            .img-style:hover{
+                transform: translateY(4px); 
+                transition: 0.3s;
+            }
+            
+        </style>
+        
+    </h:head>
+    <h:body>
+        
+        <h:form>
+        <div class="container">
+            <div class="header">
+                <div style="font-size : 30px; color:#a1caff; ">BME</div>
+                <h:commandLink style="font-size : 20px; " value="Log Out" action="login.xhtml"/>
+            </div>
+            <div class="content-large info" style="margin-left: 20px;">
+                <h2>Information</h2>
+                <span>Card Holder     : </span>
+                <h:outputText value="#{homePresenter.user}"/>
+                <br/>
+                <span>Card ID     : </span>
+                <h:outputText value="#{homePresenter.cardId}"/>
+                <br/>
+                <span>Card Type   : </span>
+                <h:outputText value="#{homePresenter.type}"/>
+                <br/>
+                <br/>
+                <br/>
+                <span>Balance   : </span>
+                <br/>
+                <h:outputText style="font-size: 40px; margin-top: 20px;" value="#{homePresenter.balance}"/>
+                <br/>
+                <br/>
+                <h:commandButton value="Show User Data" action="edit_data.xhtml"/>
+                
+                <img class="img-style" src="https://www.paypalobjects.com/HomeScreen/AddPhoto.png"/>
+            </div>
+            <div class="content-small">
+                <h2>Transfer</h2>
+                <span>Destination Card ID :</span>
+                <br/>
+                <h:inputText class="edit-text" value="#{homePresenter.destinationId}"/>
+                <br/>
+                
+                <span style="margin-top: 10px;">Amount:</span>
+                <br/>
+                <h:inputText class="edit-text" value="#{homePresenter.amountTransfer}"/>
+                
+                
+                
+                <h:commandButton class="btn" style="margin-left:20px;" value="Send" action="#{homePresenter.transfer()}"/>
+            </div>
+            <div class="content-large-2" style="margin-right: 20px;">
+                 <h2>Logs</h2>
+                 <h:commandButton action="logs.xhtml" value="See Logs"/>
+                 <br/>
+                 <br/>
+                 <h2>Contact</h2>
+                 <div>Email   : contact@bme.com</div>
+                 <div>Phone   : +51 723-349</div>
+                 <div>Address : Orion State St.181, Central Orion Office, Dubai, UAE</div>
+                 <br/>
+            </div>
+            <div class="content-small">
+                <h2>Topup</h2>
+                
+                <br/>
+                
+                <span>Amount:</span>
+                <br/>
+                <h:inputText class="edit-text" value="#{homePresenter.amountTopup}"/>
+                
+                <h:commandButton class="btn" style="margin-left: 20px;" value="Top Up" action="#{homePresenter.topup()}"/>
+            </div>
+            <div class="footer">
+                <hr/>
+                <div style="display: flex; justify-content: center;">
+                    <div >
+                        Made with ♡
+                    </div>
+                    
+                </div>
+                <div style="display: flex; justify-content: center;">
+                    <div>
+                        By Fikri Haikal
+                    </div>
+                </div>
+                <div style="display: flex; justify-content: center;">
+                    <div>
+                        <h:outputLink value="https://fikrihkl.xyz">My Page (still in development :D)</h:outputLink>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+            
+        </h:form>
+    </h:body>
+</html>
+

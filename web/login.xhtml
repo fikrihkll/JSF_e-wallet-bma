@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+        <style>
+            .card{
+                padding:30px;
+                border-radius: 20px;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            }
+            .btn{
+                padding:5px;
+                border-radius:15px;
+                background-color: #a1caff;
+                border-color: 0;
+            }
+            
+            .btn:hover{
+                cursor:pointer;
+                background-color: #c9e1ff;
+            }
+            
+            .edit-text{
+                border-radius: 10px;
+                border-color: #a1caff;
+                padding:8px;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <h:form>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            
+            <div style="display:flex; justify-content: center; align-items: center; height:100%">
+                <div class="card">
+                    <h:commandLink action="index.xhtml" style="text-align: center; color: black;"><h4>Bank Midle Europe</h4></h:commandLink>
+                    <h2>Login</h2>
+  
+                    <div style="display:flex; justify-content: space-between; align-items: center;">
+                        <span>Email</span><h:inputText class="edit-text" style="margin-left: 20px" value="#{loginPresenter.email}" />
+                    </div>
+                    
+                    <div style="display:flex; justify-content: space-between; margin-top: 5px; align-items: center;">
+                        <span>Password</span> <h:inputSecret class="edit-text" style="margin-left: 20px;" value="#{loginPresenter.pass}"/>
+                       
+                    </div>
+                     <h:commandButton class="btn" style="width: 100%; margin-top:20px;" action="#{loginPresenter.login()}" value="Login"/>
+                    
+                </div>
+            </div>
+            
+        </h:form>
+    </h:body>
+</html>
+

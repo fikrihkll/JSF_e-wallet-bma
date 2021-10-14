@@ -54,7 +54,7 @@
         </style>
     </h:head>
     <h:body>
-        <h:inputHidden value="#{editDataPresenter.user}"/>
+        <h:inputHidden value="#{tblUser.getUser()}"/>
         <h:form>
             
             <div class="header">
@@ -69,18 +69,21 @@
                 <div style="display:flex; justify-content: center; align-items: center; height:100%">
                     <div class="card">
                         <h1 style="text-align: center;" >Profile Info</h1>
+                        <h:inputHidden value="#{tblUser.pass}"/>
+                        <h:inputHidden value="#{tblUser.id}"/>
+                        <h:inputHidden value="#{tblUser.email}"/>
                         <div style="display:flex; justify-content: space-between;">
-                            <span>Name</span><h:inputText style="margin-left: 30px; width:290px;" class="edit-text" value="#{editDataPresenter.name}" />
+                            <span>Name</span><h:inputText style="margin-left: 30px; width:290px;" class="edit-text" value="#{tblUser.name}" />
                         </div>
                         
                         <div style="display:flex; justify-content: space-between;">
-                            <span>Email</span><h:inputText style="margin-left: 30px; width:290px;"  class="edit-text" value="#{editDataPresenter.email}" />
+                            <span>Email</span><h:inputText style="margin-left: 30px; width:290px;"  class="edit-text" value="#{tblUser.email}" readonly="true"/>
                         </div>
                         <div style="display:flex; justify-content: space-between;">
-                            <span>Address</span><h:inputText style="margin-left: 30px; width:290px;"  class="edit-text" value="#{editDataPresenter.address}" />
+                            <span>Address</span><h:inputText style="margin-left: 30px; width:290px;"  class="edit-text" value="#{tblUser.address}" />
                         </div>
                         
-                        <h:commandButton class="btn" style="width:100%; margin-top: 30px" action="#{editDataPresenter.updateUserData()}" value="Save Information"/>
+                        <h:commandButton class="btn" style="width:100%; margin-top: 30px" action="#{tblUser.updateUserData()}" value="Save Information"/>
                         
                     </div>
                 </div>

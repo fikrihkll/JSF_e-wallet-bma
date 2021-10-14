@@ -53,8 +53,5 @@ public class EditDataPresenter implements Serializable {
         return "yoho";
     }
     
-    public void updateUserData(){
-        
-        dao.updateUserData(name, address);
-    }
+   
 }

@@ -7,8 +7,10 @@ package presenter;
 
 import dao.UserDao;
 import java.io.Serializable;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import pojo.TblUser;
 
 /**
  *
@@ -22,10 +24,10 @@ public class LoginPresenter implements Serializable{
     
     public String login(){
         UserDao dao = new UserDao();
-        Boolean isSuccess = dao.login(email, pass);
-        System.out.println(isSuccess);
+        List<TblUser> us = dao.login(email, pass);
         
-        if(isSuccess)
+        
+        if(us != null && !us.isEmpty() )
             return "home.xhtml";
         else
             return "login.xhtml";

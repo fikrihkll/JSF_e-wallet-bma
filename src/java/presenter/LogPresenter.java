@@ -16,8 +16,8 @@ import model.Logs;
  *
  * @author zackm
  */
-@ManagedBean(name = "log_bean" , eager= true)
-@SessionScoped
+//@ManagedBean(name = "log_bean" , eager= true)
+//@SessionScoped
 public class LogPresenter implements Serializable {
     
     private ArrayList<Logs> logs = new ArrayList<Logs>(

@@ -10,10 +10,15 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import model.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import pojo.EWalletUtil;
+import pojo.TblLog;
+import pojo.TblUser;
 import presenter.Singleton;
 
 
@@ -25,47 +30,91 @@ public class UserDao {
     
    
     
-    public void updateUserData(String name, String address){
-        Connection connection = Singleton.getConnection(); 
-        try{  
-            PreparedStatement stmt = connection .prepareStatement("UPDATE tbl_user SET name = ?, address=? WHERE id = ?");  
-            stmt.setString(1, name);  
-            stmt.setString(2, address);  
-            stmt.setString(3, Integer.toString(Singleton.userId));  
-            int result = stmt.executeUpdate();  
-            
-           
-                    
-        }catch(Exception e){  
-            System.out.println(e);  
-        }  
-
-    }
+//    public void updateUserData(String name, String address){
+//        Connection connection = Singleton.getConnection(); 
+//        try{  
+//            PreparedStatement stmt = connection .prepareStatement("UPDATE tbl_user SET name = ?, address=? WHERE id = ?");  
+//            stmt.setString(1, name);  
+//            stmt.setString(2, address);  
+//            stmt.setString(3, Integer.toString(Singleton.userId));  
+//            int result = stmt.executeUpdate();  
+//            
+//           
+//                    
+//        }catch(Exception e){  
+//            System.out.println(e);  
+//        }  
+//
+//    }
     
-    public Boolean login(String email,String pass){
+    public List<TblUser> login(String email,String pass){
+        Transaction trans= null;
+        List<TblUser> list = new ArrayList();
         
-        Boolean isSuccess = false;
-        Connection connection = Singleton.getConnection(); 
-        User user = new User();
+        Session session = EWalletUtil.getSessionFactory().openSession();
         try{  
-            Statement stmt=connection.createStatement();    
-            ResultSet rs=stmt.executeQuery("select id from tbl_user WHERE email = '"+email+"' AND pass = '"+pass+"'");    
-
-            int id = -1;
-            while(rs.next()){  
-                id= rs.getInt("id");
-            }  
-            System.out.println(Integer.toString(id));
-            if(id>0){
-                Singleton.userId=id;
-                isSuccess = true;
+            trans = session.beginTransaction();
+            Query query = session.createQuery("from TblUser WHERE email = :mEmail AND pass = :mPass");
+            query.setString("mEmail", email);
+            query.setString("mPass", pass);
+          
+            list = query.list();
+            
+            if(list!=null || !list.isEmpty()){
+                 Singleton.userId=list.get(0).getId();
             }
             
+            trans.commit();
                   
         }catch(Exception e){  
             System.out.println(e);  
         }  
-        return isSuccess;
+        return list;
+    }
+    
+    public TblUser getById(){
+        TblUser user = new TblUser();
+        Transaction trans = null;
+        Session session = EWalletUtil.getSessionFactory().openSession();
+        try{
+            trans = session.beginTransaction();
+            Query query = session.createQuery("from TblUser where id = :mId");
+            query.setString("mId", Integer.toString(Singleton.userId));
+            user = (TblUser) query.uniqueResult();
+            trans.commit();
+        }catch(Exception e){
+            System.out.println(e.toString());
+        }
+        return user;
+    }
+    
+    public List<TblLog> getLogs(){
+        List<TblLog> list = new ArrayList();
+        Transaction trans = null;
+        Session session = EWalletUtil.getSessionFactory().openSession();
+        try{
+            trans = session.beginTransaction();
+            Query query = session.createQuery("from TblLog");
+           
+            list =  query.list();
+            trans.commit();
+        }catch(Exception e){
+            System.out.println(e.toString());
+        }
+        return list;
+    }
+    
+    public void updateUser(TblUser user){
+        System.out.println("IN - UPDATE 2"+user.getId().toString());
+        Transaction trans = null;
+        Session session = EWalletUtil.getSessionFactory().openSession();
+        try{
+            trans = session.beginTransaction();
+            session.update(user);
+            trans.commit();
+        }catch(Exception e){
+            System.out.println(e.toString());
+        }
     }
     
     public User getUserData(){

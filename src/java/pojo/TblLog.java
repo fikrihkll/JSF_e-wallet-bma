@@ -5,6 +5,7 @@ import dao.UserDao;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import presenter.Singleton;
 
 
 
@@ -35,7 +36,7 @@ public class TblLog  implements java.io.Serializable {
     
     public List<TblLog> getLogs(){
         UserDao dao = new UserDao();
-        List<TblLog> list = dao.getLogs();
+        List<TblLog> list = dao.getLogs(Singleton.userId);
         return list;
     }
    

@@ -10,6 +10,7 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import model.User;
+import pojo.TblUser;
 
 /**
  *
@@ -46,7 +47,9 @@ public class EditDataPresenter implements Serializable {
     }
     
     public String getUser(){
-        User user = dao.getUserData();
+        TblUser us = dao.getById(Singleton.userId);
+        System.out.println(us.getTblWallets());
+        User user = new User(us.getName(),us.getAddress(),us.getEmail(),us.getId());
         setAddress(user.getAddress());
         setEmail(user.getEmail());
         setName(user.getName());

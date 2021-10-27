@@ -72,14 +72,14 @@ public class UserDao {
         return list;
     }
     
-    public TblUser getById(){
+    public TblUser getById(int userId){
         TblUser user = new TblUser();
         Transaction trans = null;
         Session session = EWalletUtil.getSessionFactory().openSession();
         try{
             trans = session.beginTransaction();
             Query query = session.createQuery("from TblUser where id = :mId");
-            query.setString("mId", Integer.toString(Singleton.userId));
+            query.setString("mId", Integer.toString(userId));
             user = (TblUser) query.uniqueResult();
             trans.commit();
         }catch(Exception e){
@@ -88,13 +88,14 @@ public class UserDao {
         return user;
     }
     
-    public List<TblLog> getLogs(){
+    public List<TblLog> getLogs(int userId){
         List<TblLog> list = new ArrayList();
         Transaction trans = null;
         Session session = EWalletUtil.getSessionFactory().openSession();
         try{
             trans = session.beginTransaction();
-            Query query = session.createQuery("from TblLog");
+            Query query = session.createQuery("from TblLog where id=:mId");
+            query.setString("mId", Integer.toString(userId));
            
             list =  query.list();
             trans.commit();

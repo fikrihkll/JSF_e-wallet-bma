@@ -22,7 +22,8 @@ public class TransactionDao {
     
     Wallet wallet=null;
     
-    public void topup(int amount){
+    public boolean topup(int amount){
+        boolean res = true;
         try{
             Connection connection = Singleton.getConnection(); 
            
@@ -40,6 +41,7 @@ public class TransactionDao {
             if(result >0 && result2 > 0){
                 stmt = connection.prepareStatement("COMMIT");
             }else{
+                res = false;
                 stmt = connection.prepareStatement("ROLLBACK");
             }
             stmt.executeUpdate();
@@ -48,8 +50,10 @@ public class TransactionDao {
             System.out.println("RESULT TOPUP 1 "+Integer.toString(result));    
             
         }catch(Exception e){
+            res = false;
             System.out.println(e.toString());
         }
+        return res;
     }
     
     public ArrayList<Logs> getLogs(){
@@ -139,38 +143,7 @@ public class TransactionDao {
         return isSuccess;
     }
     
-    public String getName(){
-        System.out.println("CALLED");
-        Connection connection = Singleton.getConnection(); 
-        int balance= 0;
-        try{  
-            Statement stmt= connection.createStatement();    
-            ResultSet rs=stmt.executeQuery("SELECT tbl_wallet.id,tbl_wallet.user_id,tbl_wallet.balance,tbl_wallet.type,tbl_user.name FROM tbl_wallet INNER JOIN tbl_user ON tbl_wallet.user_id = "+Singleton.userId+" AND tbl_user.id = "+Singleton.userId);    
-            
-            while(rs.next()){  
-                wallet = new Wallet(
-                        rs.getInt("id"),
-                        rs.getInt("user_id"),
-                        rs.getInt("balance"),
-                        rs.getString("type"),
-                        rs.getString("name")
-                );
-            }  
-                    
-        }catch(Exception e){  
-            System.out.println(e);  
-        }  
-        
-        
-        
-        if(wallet==null){
-            getWalletInfo();
-            System.out.println("null");
-        }
-        System.out.println("INNN");
-        System.out.println("DAO "+wallet.getName());
-        return wallet.getName();
-    }
+    
     
     public int getCardId(){
         if(wallet==null){
